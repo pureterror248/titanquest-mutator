@@ -93,6 +93,7 @@ private fun doSave(state: TitanQuestMutatorState) {
         data.skillPoints = viewModel.availableSkillpoints.value.toInt()
         data.numberOfKills = viewModel.numberOfKills.value.toInt()
         data.numberOfDeaths = viewModel.numberOfDeaths.value.toInt()
+        data.playTimeInSeconds = viewModel.playTimeInSeconds.value.toInt()
     } catch (e: Exception) {
         logger.error("Saving failed; user entered data is invalid")
     }
