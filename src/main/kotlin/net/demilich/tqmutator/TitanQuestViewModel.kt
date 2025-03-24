@@ -16,6 +16,7 @@ class TitanQuestViewModel {
     val availableSkillpoints: MutableState<String> = mutableStateOf("0")
     val numberOfKills: MutableState<String> = mutableStateOf("0")
     val numberOfDeaths: MutableState<String> = mutableStateOf("0")
+    val playTimeInSeconds: MutableState<String> = mutableStateOf("0")
 
     fun update(data: TitanQuestCharacterFile) {
         filename.value = data.file.path
@@ -27,6 +28,7 @@ class TitanQuestViewModel {
         availableSkillpoints.value = data.skillPoints.toString()
         numberOfKills.value = data.numberOfKills.toString()
         numberOfDeaths.value = data.numberOfDeaths.toString()
+        playTimeInSeconds.value = data.playTimeInSeconds.toString()
     }
 }
 
