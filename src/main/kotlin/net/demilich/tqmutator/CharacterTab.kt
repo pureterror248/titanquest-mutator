@@ -50,6 +50,13 @@ fun CharacterTab(viewModel: TitanQuestViewModel) {
             false,
             InputValidation.INTEGER
         )
+        StringValueRow(
+            "Play Time In Seconds",
+            viewModel,
+            viewModel.playTimeInSeconds,
+            false,
+            InputValidation.INTEGER
+        )
     }
 }
 
