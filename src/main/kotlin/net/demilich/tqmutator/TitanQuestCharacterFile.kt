@@ -13,6 +13,7 @@ const val MARKER_ATTRIBUTE_POINTS = "modifierPoints"
 const val MARKER_SKILLPOINTS = "skillPoints"
 const val MARKER_STATS_KILLS = "numberOfKills"
 const val MARKER_STATS_DEATHS = "numberOfDeaths"
+const val MARKER_STATS_PLAYTIME = "playTimeInSeconds"
 
 val MARKER_LIST = listOf(
     MARKER_HEADER_VERSION,
@@ -23,6 +24,7 @@ val MARKER_LIST = listOf(
     MARKER_SKILLPOINTS,
     MARKER_STATS_KILLS,
     MARKER_STATS_DEATHS
+    MARKER_STATS_PLAYTIME
 )
 
 class TitanQuestCharacterFile(
@@ -36,6 +38,7 @@ class TitanQuestCharacterFile(
     var skillPoints: Int,
     var numberOfKills: Int,
     var numberOfDeaths: Int,
+    var playTimeInSeconds: Int,
 ) {
     val oldName: String = characterName
 }
@@ -54,6 +57,7 @@ fun loadCharacterFile(file: File): TitanQuestCharacterFile {
     val skillPoints = readInt(buffer, markers[MARKER_SKILLPOINTS]!!)
     val numberOfKills = readInt(buffer, markers[MARKER_STATS_KILLS]!!)
     val numberOfDeaths = readInt(buffer, markers[MARKER_STATS_DEATHS]!!)
+    val playTimeInSeconds = readInt(buffer, markers[MARKER_STATS_PLAYTIME]!!)
     val duration = System.currentTimeMillis() - timeStart
     logger.info("LOADING character file was successful, took $duration ms")
 
@@ -67,7 +71,8 @@ fun loadCharacterFile(file: File): TitanQuestCharacterFile {
         attributePoints,
         skillPoints,
         numberOfKills,
-        numberOfDeaths
+        numberOfDeaths,
+        playTimeInSeconds
     )
 }
 
@@ -95,6 +100,9 @@ fun saveCharacterFile(saveData: TitanQuestCharacterFile): TitanQuestCharacterFil
     }
     if (markers.containsKey(MARKER_STATS_DEATHS)) {
         writeInt(buffer, markers[MARKER_STATS_DEATHS]!!, saveData.numberOfDeaths)
+    }
+    if (markers.containsKey(MARKER_STATS_PLAYTIME)) {
+        writeInt(buffer, markers[MARKER_STATS_PLAYTIME]!!, saveData.playTimeInSeconds)
     }
 
     // write name last, as this changes file length and thus invalidates all markers
